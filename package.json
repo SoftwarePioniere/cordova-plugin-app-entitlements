@@ -1,0 +1,20 @@
+{
+  "name": "app-entitlements",
+  "version": "0.0.1",
+  "description": "",
+  "cordova": {
+    "id": "app-entitlements",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "xcode": "^1.0.0"
+  }
+}

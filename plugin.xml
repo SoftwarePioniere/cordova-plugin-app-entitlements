@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="app-entitlements" version="0.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+  <name>AppEntitlements</name>
+
+  <preference name="APS_ENV" />
+
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="PushNotification">
+        <param name="ios-package" value="PushPlugin"/>
+      </feature>
+    </config-file>
+    <config-file target="*-Info.plist" parent="UIBackgroundModes">
+      <array>
+        <string>remote-notification</string>
+      </array>
+    </config-file>
+
+    <!-- ENABLE PUSH CAPABILITY - NEW -->
+    <config-file parent="aps-environment" target="*/ADALiOS.entitlements">
+      <string>$APS_ENV</string>
+    </config-file>
+
+    <!--<hook src="cordova-ios-set-push.js" type="after_prepare" />-->
+    <hook src="cordova-ios-set-push.js" type="before_build" />
+  </platform>
+
+</plugin>

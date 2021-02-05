@@ -16,11 +16,12 @@
       </array>
     </config-file>
 
-    <!-- ENABLE PUSH CAPABILITY - NEW -->
+    <!-- DISBALED - no Adalios is used    
     <config-file parent="aps-environment" target="*/ADALiOS.entitlements">
       <string>$APS_ENV</string>
     </config-file>
-
+    -->
+    
     <!--<hook src="cordova-ios-set-push.js" type="after_prepare" />-->
     <hook src="cordova-ios-set-push.js" type="before_build" />
   </platform>

@@ -13,9 +13,9 @@ module.exports = function (ctx)
         return;
       }
     
-      var deferral = ctx.requireCordovaModule('q').defer();
-      var common = ctx.requireCordovaModule('cordova-common');
-      var util = ctx.requireCordovaModule('cordova-lib/src/cordova/util');
+      var deferral = ctx.require('q').defer();
+      var common = ctx.require('cordova-common');
+      var util = ctx.require('cordova-lib/src/cordova/util');
 
       var projectName = new common.ConfigParser(util.projectConfig(util.isCordova())).name();
       var projectPath = './platforms/ios/' + projectName + '.xcodeproj/project.pbxproj';

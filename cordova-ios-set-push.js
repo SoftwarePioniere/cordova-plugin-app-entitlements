@@ -6,24 +6,27 @@
 
 
 
-module.exports = function (ctx)
+module.exports = function (context)
 {
-    if (ctx.opts.platforms.indexOf('ios') < 0) {
-        return;
+      if (!context.opts.platforms || !context.opts.platforms.includes('ios')) {
+          return;
       }
         
       var deferral = require('q').defer();
     
       var fs = require('fs');
       var xcode = require('xcode');
-     
+      var path = require('path');
       var common = require('cordova-common');
-      var util = require('cordova-lib/src/cordova/util');
       
-      var projectName = new common.ConfigParser(util.projectConfig(util.isCordova())).name();
-      var projectPath = './platforms/ios/' + projectName + '.xcodeproj/project.pbxproj';
+      var rootPath = context.opts.projectRoot;
+      var configXmlPath = path.join(rootPath, 'config.xml');
+      
+      var configParser = new common.ConfigParser(configXmlPath);
+      var appName = configParser.name();
+        
+      var projectPath = './platforms/ios/' + appName + '.xcodeproj/project.pbxproj';
       var project = xcode.project(projectPath);
-
 
       project.parse(function(err) {
         if (err) {

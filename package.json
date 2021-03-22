@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-app-entitlements",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "cordova": {
     "id": "cordova-plugin-app-entitlements",

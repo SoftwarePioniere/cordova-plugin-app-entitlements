@@ -4,72 +4,23 @@
  * Credit to Quintonn: https://stackoverflow.com/questions/45925548/unable-to-add-push-notifications-entitlement-to-ios-production-with-cordova-plug
  */
 
+var fs = require('fs');
+var xcode = require('xcode');
 
-module.exports = function (context)
+module.exports = function (ctx)
 {
-      if (!context.opts.platforms || !context.opts.platforms.includes('ios')) {
-          return;
+    if (ctx.opts.platforms.indexOf('ios') < 0) {
+        return;
       }
-        
-      var deferral = require('q').defer();
     
-      // var fs = require('fs');
-      // var xcode = require('xcode');
-      // var path = require('path');
-      // var common = require('cordova-common');
-      
-      // var rootPath = context.opts.projectRoot;
-      // var configXmlPath = path.join(rootPath, 'config.xml');
-      
-      // var configParser = new common.ConfigParser(configXmlPath);
-      // var appName = configParser.name();
-        
-      // var projectPath = './platforms/ios/' + appName + '.xcodeproj/project.pbxproj';
-      // var project = xcode.project(projectPath);
+      var deferral = ctx.requireCordovaModule('q').defer();
+      var common = ctx.requireCordovaModule('cordova-common');
+      var util = ctx.requireCordovaModule('cordova-lib/src/cordova/util');
 
-      // project.parse(function(err) {
-      //   if (err) {
-      //     console.error('cordova-ios-set-push::error');
-      //     console.error(err);
-      //     deferral.reject('xcode could not parse project');
-          
-      //   } else{
-        
-      //     console.log('cordova-ios-set-push::writing SystemCapabilities');
-          
-      //     var pushEntitlement = "{com.apple.Push ={enabled = 1;};}";
-      //     project.addTargetAttribute("SystemCapabilities", pushEntitlement);
-
-      //     fs.writeFileSync(projectPath, project.writeSync());
-      //     deferral.resolve();
-      //   }
-      // });
-    
-      return deferral.promise;
-};
-
-/**
-module.exports = function (context)
-{
-      if (!context.opts.platforms || !context.opts.platforms.includes('ios')) {
-          return;
-      }
-        
-      var deferral = require('q').defer();
-    
-      var fs = require('fs');
-      var xcode = require('xcode');
-      var path = require('path');
-      var common = require('cordova-common');
-      
-      var rootPath = context.opts.projectRoot;
-      var configXmlPath = path.join(rootPath, 'config.xml');
-      
-      var configParser = new common.ConfigParser(configXmlPath);
-      var appName = configParser.name();
-        
-      var projectPath = './platforms/ios/' + appName + '.xcodeproj/project.pbxproj';
+      var projectName = new common.ConfigParser(util.projectConfig(util.isCordova())).name();
+      var projectPath = './platforms/ios/' + projectName + '.xcodeproj/project.pbxproj';
       var project = xcode.project(projectPath);
+
 
       project.parse(function(err) {
         if (err) {
@@ -91,4 +42,3 @@ module.exports = function (context)
     
       return deferral.promise;
 };
-*/
